@@ -48,6 +48,17 @@ function test_console_all_keys() {
     qt_screenshot_ppm "console_all_keys"
 }
 
+function test_install_am() {
+    wget -q https://raw.githubusercontent.com/ivan-hc/AM/main/AM-INSTALLER
+    chmod a+x ./AM-INSTALLER
+    ./AM-INSTALLER
+    qt_send_string_return "# 1"
+}
+
+function test_am() {
+    am -f
+}
+
 function test_console_logout_user() {
     # Logout
     qt_send_key_combo "ctrl-d"
@@ -70,6 +81,8 @@ function test_boot_to_login() {
     test_console_login_user
     test_console_clear_screen
     test_console_all_keys
+    test_install_am
+    test_am
     test_console_logout_user
     test_power_off_vm
 }
